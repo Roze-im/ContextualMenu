@@ -66,6 +66,18 @@ class ViewController: UIViewController {
         return b
     }()
 
+    lazy var collectionViewItems = ["a", "b", "c", "d"]
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        let res = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        res.dataSource = self
+        res.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
+        return res
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +103,7 @@ class ViewController: UIViewController {
                 }
             )
         }
+        view.addSubview(collectionView)
 
         view.addInteraction(
             targetedPreviewProvider: { [weak self] _ in
@@ -124,10 +137,57 @@ class ViewController: UIViewController {
             height: view.bounds.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom - 20 - bigLabelBottomLeft.bounds.height
         )
         largeLabel.frame = CGRect(x: 20, y: view.safeAreaInsets.top, width: view.bounds.width - 40, height: 20)
+
+        collectionView.frame = CGRect(
+            x: view.bounds.width - 100,
+            y: view.bounds.height - 100,
+            width: 100,
+            height: 100
+        )
     }
 
     @objc func onTouchUpInsideAccesoryView(_ sender: Any?) {
         print("onTouchUpInsideAccesoryView")
         UIView.dismissCurrentContextMenu()
+    }
+}
+
+extension ViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return collectionViewItems.count
+    }
+    func collectionView(
+        _ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell", for: indexPath)
+        let text = "\(indexPath.item):\(collectionViewItems[indexPath.row])"
+        if let label = cell.viewWithTag(1) as? UILabel {
+            label.text = text
+        } else {
+            let label = UILabel(frame: .init(origin: .zero, size: .init(width: 25, height: 25)))
+            label.text = text
+            label.textAlignment = .center
+            label.tag = 1
+            cell.addSubview(label)
+        }
+        cell.backgroundColor = .gray
+        cell.addInteraction(
+            targetedPreviewProvider: { _ in
+                return .init(view: cell)
+            },
+            menuConfigurationProvider: { [weak self] v in
+                guard let self else { return .init(menu: .init(children: [])) }
+                return ContextMenuConfiguration(
+                    accessoryView: self.accessoryView,
+                    menu: Menu(children: [
+                        MenuElement(
+                            title: "Cell tapped",
+                            handler: { _ in print("Tapped") }
+                        )
+                    ])
+                )
+            }
+        )
+        return cell
     }
 }

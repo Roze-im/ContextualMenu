@@ -57,6 +57,20 @@ extension ContextMenuViewController: ContextMenuAnimatable {
         NSLayoutConstraint.deactivate(constraintsAlteringPreviewPosition)
         view.setNeedsLayout()
 
+        // Restore original view's alpha in sync with animation
+        // Using below animation completion block causes a slight flickering sometimes
+        if let originalView = targetedPreview?.view {
+            UIView.animate(
+                withDuration: style.disapparition.duration,
+                delay: 0,
+                options: [.beginFromCurrentState],
+                animations: {
+                    originalView.alpha = 1
+                },
+                completion: nil
+            )
+        }
+
         previewRendering.layer.animate(
             keyPath: \.shadowOpacity,
             toValue: 0,
@@ -83,8 +97,7 @@ extension ContextMenuViewController: ContextMenuAnimatable {
                 }
             },
             completion: { [weak self] _ in
-                self?.targetedPreview?.view.alpha = 1
-
+                // Don't modify alpha here anymore since we handle it in the synchronized animation above
                 // targetedPreview might be retaining views. Nullifying it to break any potential retain cycle
                 self?.targetedPreview = nil
                 completion?()
