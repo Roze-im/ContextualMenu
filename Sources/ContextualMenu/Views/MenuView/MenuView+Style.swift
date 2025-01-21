@@ -11,6 +11,7 @@ import UIKit
 extension MenuView {
     public struct Style {
         let backgroundColor: UIColor
+        let separatorColor: UIColor
         let cornerRadius: CGFloat
         let element: MenuElementView.Style
         let width: CGFloat
@@ -22,6 +23,7 @@ extension MenuView {
 
         public init(
             backgroundColor: UIColor = .white.withAlphaComponent(0.39),
+            separatorColor: UIColor = .darkGray,
             cornerRadius: CGFloat = 12,
             element: MenuElementView.Style = MenuElementView.Style(),
             width: CGFloat = 250,
@@ -30,6 +32,7 @@ extension MenuView {
             disapparition: AnimationParameters = AnimationParameters()
         ) {
             self.backgroundColor = backgroundColor
+            self.separatorColor = separatorColor
             self.cornerRadius = cornerRadius
             self.element = element
             self.width = width

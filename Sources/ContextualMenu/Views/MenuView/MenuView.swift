@@ -16,7 +16,7 @@ public final class MenuView: UIView {
     let stackView: UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
-        sv.distribution = .fillEqually
+        sv.distribution = .fillProportionally
         sv.translatesAutoresizingMaskIntoConstraints = false
         return sv
     }()
@@ -40,9 +40,12 @@ public final class MenuView: UIView {
         layer.cornerRadius = style.cornerRadius
         backgroundColor = style.backgroundColor
 
-        for child in menu.children {
+        for (childIdx, child) in menu.children.enumerated() {
             let elementView = MenuElementView(element: child, style: style.element, delegate: self)
             stackView.addArrangedSubview(elementView)
+            if childIdx < menu.children.count - 1 {
+                stackView.addArrangedSubview(MenuView.buildSeparator(style: style))
+            }
         }
 
         addSubview(stackView)
@@ -54,6 +57,13 @@ public final class MenuView: UIView {
             stackView.widthAnchor.constraint(equalToConstant: style.width),
             stackView.heightAnchor.constraint(equalToConstant: CGFloat(menu.children.count) * style.element.height)
         ])
+    }
+
+    private static func buildSeparator(style: Style) -> UIView {
+        let res = UIView()
+        res.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        res.backgroundColor = style.separatorColor
+        return res
     }
 
     required init?(coder: NSCoder) {
