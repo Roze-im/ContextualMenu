@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-public struct MenuElement {
-    let title: String
-    let image: UIImage?
+public struct MenuElement: Hashable, Equatable {
+    public let title: String
+    public let image: UIImage?
     let attributes: Attributes
     var handler: ((MenuElement) -> Void)?
-
+    
     public init(
         title: String,
         image: UIImage? = nil,
@@ -35,6 +35,18 @@ public struct MenuElement {
                 handler?(self)
             }
         )
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(title)
+        hasher.combine(image)
+        hasher.combine(attributes.rawValue)
+    }
+    
+    public static func == (lhs: MenuElement, rhs: MenuElement) -> Bool {
+        return lhs.title == rhs.title &&
+            lhs.image == rhs.image &&
+            lhs.attributes == rhs.attributes
     }
 }
 
