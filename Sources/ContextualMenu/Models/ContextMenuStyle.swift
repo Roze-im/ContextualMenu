@@ -55,7 +55,7 @@ extension ContextMenuStyle {
         public var shadow: ShadowParameters
 
         public init(
-            transform: CGAffineTransform = .init(scaleX: 1.2, y: 1.2),
+            transform: CGAffineTransform = .init(scaleX: 1, y: 1),
             topMargin: CGFloat = 8,
             bottomMargin: CGFloat = 8,
             shadow: ShadowParameters = .init()
