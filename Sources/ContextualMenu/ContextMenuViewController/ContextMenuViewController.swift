@@ -91,6 +91,7 @@ class ContextMenuViewController: UIViewController {
         self.delegate = delegate
 
         super.init(nibName: nil, bundle: nil)
+        self.overrideUserInterfaceStyle = style.overrideUserInterfaceStyle
     }
 
     required init?(coder: NSCoder) {
