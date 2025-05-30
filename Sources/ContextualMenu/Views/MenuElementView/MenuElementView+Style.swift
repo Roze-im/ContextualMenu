@@ -25,17 +25,17 @@ extension MenuElementView {
         public init(
             height: CGFloat = 44,
             backgroundColor: UIColor = .clear,
-            highlightedBackgroundColor: UIColor = .black.withAlphaComponent(0.2),
+            highlightedBackgroundColor: UIColor = .systemGray4,
             defaultTitleAttributes: [NSAttributedString.Key : Any] = [
                 .font: UIFont.systemFont(ofSize: 17),
-                .foregroundColor: UIColor.black
+                .foregroundColor: UIColor.label
             ],
             destructiveTitleAttributes: [NSAttributedString.Key : Any] = [
                 .font: UIFont.systemFont(ofSize: 17),
-                .foregroundColor: UIColor.red
+                .foregroundColor: UIColor.systemRed
             ],
-            defaultIconTint: UIColor = .black,
-            destructiveIconTint: UIColor = .red,
+            defaultIconTint: UIColor = .label,
+            destructiveIconTint: UIColor = .systemRed,
             iconSize: CGSize = .init(width: 22, height: 22)
         ) {
             self.height = height
