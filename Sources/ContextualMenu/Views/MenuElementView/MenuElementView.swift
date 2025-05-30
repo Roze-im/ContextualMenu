@@ -1,84 +1,73 @@
 //
-//  MenuElementView.swift
+//  MenuElementView+Style.swift
 //  
 //
-//  Created by Thibaud David on 08/02/2023.
+//  Created by Thibaud David on 17/02/2023.
 //
 
 import Foundation
 import UIKit
 
-protocol MenuElementViewDelegate: AnyObject {
-    func menuElementViewTapped(menuElementView: MenuElementView)
-}
+extension MenuElementView {
+    public struct Style {
+        let height: CGFloat
 
-public final class MenuElementView: UIView {
+        let backgroundColor: UIColor
+        let highlightedBackgroundColor: UIColor
 
-    lazy var label: UILabel = {
-        let l = UILabel()
-        l.translatesAutoresizingMaskIntoConstraints = false
-        l.attributedText = .init(
-            string: element.title,
-            attributes: MenuElementView.titleAttributes(
-                attributes: element.attributes,
-                style: style
-            )
-        )
-        return l
-    }()
-    lazy var imageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.image = element.image?.withRenderingMode(.alwaysTemplate)
-        iv.tintColor = MenuElementView.iconTint(attributes: element.attributes, style: style)
-        return iv
-    }()
-    lazy var button: UIButton = {
-        let b = UIButton()
-        b.translatesAutoresizingMaskIntoConstraints = false
-        b.addTarget(self, action: #selector(onButtonTouchedUpInside), for: .touchUpInside)
-        return b
-    }()
+        let defaultTitleAttributes: [NSAttributedString.Key: Any]
+        let destructiveTitleAttributes: [NSAttributedString.Key: Any]
 
-    let element: MenuElement
+        let defaultIconTint: UIColor
+        let destructiveIconTint: UIColor
+        let iconSize: CGSize
 
-    let style: Style
-
-    weak var delegate: MenuElementViewDelegate?
-
-    init(element: MenuElement, style: Style, delegate: MenuElementViewDelegate?) {
-
-        self.element = element
-        self.style = style
-        self.delegate = delegate
-
-        super.init(frame: .zero)
-
-        addSubview(button)
-        addSubview(label)
-        addSubview(imageView)
-
-        NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: topAnchor),
-            button.leadingAnchor.constraint(equalTo: leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: trailingAnchor),
-            button.bottomAnchor.constraint(equalTo: bottomAnchor),
-            label.centerYAnchor.constraint(equalTo: centerYAnchor),
-            label.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 2),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: imageView.trailingAnchor, multiplier: 2),
-            imageView.leadingAnchor.constraint(equalToSystemSpacingAfter: label.trailingAnchor, multiplier: 2),
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: element.image == nil ? 0 : style.iconSize.width),
-            imageView.heightAnchor.constraint(equalToConstant: style.iconSize.height)
-        ])
+        public init(
+            height: CGFloat = 41.5,
+            backgroundColor: UIColor = .clear,
+            highlightedBackgroundColor: UIColor = .systemGray4,
+            defaultTitleAttributes: [NSAttributedString.Key : Any] = [
+                .font: UIFont.systemFont(ofSize: 16),
+                .foregroundColor: UIColor.label
+            ],
+            destructiveTitleAttributes: [NSAttributedString.Key : Any] = [
+                .font: UIFont.systemFont(ofSize: 16),
+                .foregroundColor: UIColor.systemRed
+            ],
+            defaultIconTint: UIColor = .label,
+            destructiveIconTint: UIColor = .systemRed,
+            iconSize: CGSize = .init(width: 22, height: 22)
+        ) {
+            self.height = height
+            self.backgroundColor = backgroundColor
+            self.highlightedBackgroundColor = highlightedBackgroundColor
+            self.defaultTitleAttributes = defaultTitleAttributes
+            self.destructiveTitleAttributes = destructiveTitleAttributes
+            self.defaultIconTint = defaultIconTint
+            self.destructiveIconTint = destructiveIconTint
+            self.iconSize = iconSize
+        }
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    internal static func titleAttributes(
+        attributes: MenuElement.Attributes,
+        style: MenuElementView.Style
+    ) -> [NSAttributedString.Key: Any] {
+        switch attributes {
+        case .destructive: return style.destructiveTitleAttributes
+        default:
+            return style.defaultTitleAttributes
+        }
     }
 
-    @objc func onButtonTouchedUpInside(_ sender: Any?) {
-        delegate?.menuElementViewTapped(menuElementView: self)
+    internal static func iconTint(
+        attributes: MenuElement.Attributes,
+        style: MenuElementView.Style
+    ) -> UIColor {
+        switch attributes {
+        case .destructive: return style.destructiveIconTint
+        default:
+            return style.defaultIconTint
+        }
     }
 }
