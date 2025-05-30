@@ -22,8 +22,8 @@ extension MenuView {
         let disapparition: AnimationParameters
 
         public init(
-            backgroundColor: UIColor = .white.withAlphaComponent(0.39),
-            separatorColor: UIColor = .darkGray,
+            backgroundColor: UIColor = .secondarySystemGroupedBackground,
+            separatorColor: UIColor = .separator,
             cornerRadius: CGFloat = 12,
             element: MenuElementView.Style = MenuElementView.Style(),
             width: CGFloat = 250,
