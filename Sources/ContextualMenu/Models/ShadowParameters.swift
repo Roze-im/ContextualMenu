@@ -6,6 +6,7 @@
 //
 
 import CoreGraphics
+import UIKit
 
 public struct ShadowParameters {
     public var color: CGColor
@@ -16,10 +17,10 @@ public struct ShadowParameters {
     public static let none = ShadowParameters(opacity: 0)
 
     public init(
-        color: CGColor = .init(red: 0, green: 0, blue: 0, alpha: 0),
+    color: CGColor = UIColor.black.cgColor,
         offset: CGSize = .init(width: 0, height: 1),
         radius: CGFloat = 5,
-        opacity: Float = 0
+        opacity: Float = 0.2
     ) {
         self.color = color
         self.offset = offset

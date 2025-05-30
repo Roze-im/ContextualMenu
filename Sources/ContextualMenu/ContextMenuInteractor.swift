@@ -91,7 +91,6 @@ class ContextMenuInteractor {
     }
     func dismissCurrentContextMenu(completion: (() -> Void)? = nil) {
         guard let contextMenuViewController else {
-            print("[ContextMenuInteractor] dismissCurrentContextMenu error: No interaction in progress")
             completion?()
             return
         }

@@ -61,7 +61,7 @@ public final class MenuView: UIView {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stackView.widthAnchor.constraint(equalToConstant: style.width),
+            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: style.minWidth),
             stackView.heightAnchor.constraint(equalToConstant: totalStackViewHeight)
         ])
     }

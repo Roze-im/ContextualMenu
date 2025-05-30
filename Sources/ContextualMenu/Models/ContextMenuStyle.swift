@@ -26,7 +26,7 @@ public struct ContextMenuStyle {
     public init(
         windowLevel: UIWindow.Level = .statusBar - 1,
         backgroundColor: UIColor = .clear,
-        backgroundBlurStyle: UIBlurEffect.Style = .systemMaterial,
+        backgroundBlurStyle: UIBlurEffect.Style = .systemUltraThinMaterial,
         blurAlpha: CGFloat = 1,
         overrideUserInterfaceStyle: UIUserInterfaceStyle = .unspecified,
         apparition: AnimationParameters = AnimationParameters(),
@@ -55,7 +55,7 @@ extension ContextMenuStyle {
         public var shadow: ShadowParameters
 
         public init(
-            transform: CGAffineTransform = .init(scaleX: 1, y: 1),
+            transform: CGAffineTransform = .identity,
             topMargin: CGFloat = 8,
             bottomMargin: CGFloat = 8,
             shadow: ShadowParameters = .init()
