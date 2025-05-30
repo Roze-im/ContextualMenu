@@ -36,7 +36,7 @@ extension MenuElementView {
             ],
             defaultIconTint: UIColor = .label,
             destructiveIconTint: UIColor = .systemRed,
-            iconSize: CGSize = .init(width: 22, height: 22)
+            iconSize: CGSize = .init(width: 20, height: 20)
         ) {
             self.height = height
             self.backgroundColor = backgroundColor
