@@ -13,6 +13,7 @@ public struct ContextMenuStyle {
     public let backgroundColor: UIColor
     public let backgroundBlurStyle: UIBlurEffect.Style
     public let blurAlpha: CGFloat
+    public let overrideUserInterfaceStyle: UIUserInterfaceStyle
 
     public let apparition: AnimationParameters
     public let disapparition: AnimationParameters
@@ -27,6 +28,7 @@ public struct ContextMenuStyle {
         backgroundColor: UIColor = .clear,
         backgroundBlurStyle: UIBlurEffect.Style = .systemUltraThinMaterialDark,
         blurAlpha: CGFloat = 1,
+        overrideUserInterfaceStyle: UIUserInterfaceStyle = .unspecified,
         apparition: AnimationParameters = AnimationParameters(),
         disapparition: AnimationParameters = AnimationParameters(),
         preview: Preview = Preview(),
@@ -36,6 +38,7 @@ public struct ContextMenuStyle {
         self.backgroundColor = backgroundColor
         self.backgroundBlurStyle = backgroundBlurStyle
         self.blurAlpha = blurAlpha
+        self.overrideUserInterfaceStyle = overrideUserInterfaceStyle
         self.apparition = apparition
         self.disapparition = disapparition
         self.preview = preview
