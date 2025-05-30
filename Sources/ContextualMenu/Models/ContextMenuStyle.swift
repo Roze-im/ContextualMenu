@@ -26,9 +26,8 @@ public struct ContextMenuStyle {
     public init(
         windowLevel: UIWindow.Level = .statusBar - 1,
         backgroundColor: UIColor = .clear,
-        backgroundBlurStyle: UIBlurEffect.Style = .systemUltraThinMaterialDark,
+        backgroundBlurStyle: UIBlurEffect.Style = .systemMaterial,
         blurAlpha: CGFloat = 1,
-        overrideUserInterfaceStyle: UIUserInterfaceStyle = .unspecified,
         apparition: AnimationParameters = AnimationParameters(),
         disapparition: AnimationParameters = AnimationParameters(),
         preview: Preview = Preview(),
