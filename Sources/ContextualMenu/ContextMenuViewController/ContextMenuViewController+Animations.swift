@@ -18,13 +18,15 @@ extension ContextMenuViewController: ContextMenuAnimatable {
     public func appearAnimation(completion: (() -> Void)? = nil) {
         NSLayoutConstraint.activate(constraintsAlteringPreviewPosition)
         view.setNeedsLayout()
-
+        
         previewRendering.layer.applyShadow(style.preview.shadow, overrideOpacity: 0)
+        
         previewRendering.layer.animate(
             keyPath: \.shadowOpacity,
             toValue: style.preview.shadow.opacity,
             duration: style.apparition.duration
         )
+
         menuView?.appearAnimation()
 
         if let animatableAccessoryView {
@@ -43,7 +45,9 @@ extension ContextMenuViewController: ContextMenuAnimatable {
                 guard let self else { return }
                 self.view.layoutIfNeeded()
                 self.backgroundBlur.alpha = self.style.blurAlpha
-                self.previewRendering.transform = self.style.preview.transform
+                // Apply transform to previewRendering
+                let transform = self.style.preview.transform
+                self.previewRendering.transform = transform
 
                 if self.animatableAccessoryView == nil {
                     // Perform a default fadin animation if needed
@@ -52,6 +56,7 @@ extension ContextMenuViewController: ContextMenuAnimatable {
             },
             completion: { _ in completion?() }
         )
+        
     }
     public func disappearAnimation(completion: (() -> Void)? = nil) {
         NSLayoutConstraint.deactivate(constraintsAlteringPreviewPosition)
@@ -71,11 +76,13 @@ extension ContextMenuViewController: ContextMenuAnimatable {
             )
         }
 
+        // Ensure shadow on previewRendering disappears correctly
         previewRendering.layer.animate(
             keyPath: \.shadowOpacity,
             toValue: 0,
-            duration: style.apparition.duration
+            duration: style.disapparition.duration 
         )
+
         menuView?.disappearAnimation()
         animatableAccessoryView?.disappearAnimation()
 
@@ -89,8 +96,9 @@ extension ContextMenuViewController: ContextMenuAnimatable {
                 guard let self else { return }
                 self.view.layoutIfNeeded()
                 self.backgroundBlur.alpha = 0
+                // Apply transform to previewRendering
                 self.previewRendering.transform = .identity
-
+                
                 if self.animatableAccessoryView == nil {
                     // Perform a default fadout animation if needed
                     self.accessoryView?.alpha = 0
