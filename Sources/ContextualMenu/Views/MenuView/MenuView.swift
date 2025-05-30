@@ -49,19 +49,26 @@ public final class MenuView: UIView {
         }
 
         addSubview(stackView)
+
+        let numberOfElements = CGFloat(menu.children.count)
+        let numberOfSeparators = max(0, numberOfElements - 1)
+        let totalElementsHeight = numberOfElements * style.element.height
+        let totalSeparatorsHeight = numberOfSeparators * (1.0 / UIScreen.main.scale)
+        let totalStackViewHeight = totalElementsHeight + totalSeparatorsHeight
+
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             stackView.widthAnchor.constraint(equalToConstant: style.width),
-            stackView.heightAnchor.constraint(equalToConstant: CGFloat(menu.children.count) * style.element.height)
+            stackView.heightAnchor.constraint(equalToConstant: totalStackViewHeight)
         ])
     }
 
     private static func buildSeparator(style: Style) -> UIView {
         let res = UIView()
-        res.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        res.heightAnchor.constraint(equalToConstant: 1.0 / UIScreen.main.scale).isActive = true
         res.backgroundColor = style.separatorColor
         return res
     }
