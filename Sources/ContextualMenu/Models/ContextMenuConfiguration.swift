@@ -12,7 +12,7 @@ public struct ContextMenuConfiguration {
     /// AccessoryView to display on top of preview.
     /// If your view conforms to `ContextMenuAnimatable`, then
     /// provided animations will be used to show/hide view
-    weak var accessoryView: UIView?
+    var accessoryView: UIView?
     let menu: Menu
 
     public init(accessoryView: UIView? = nil, menu: Menu) {
