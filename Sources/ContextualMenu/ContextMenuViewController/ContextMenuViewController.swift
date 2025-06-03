@@ -80,17 +80,21 @@ class ContextMenuViewController: UIViewController {
         delegate: ContextMenuViewControllerDelegate?
     ) {
         let configuration = interaction.menuConfigurationProvider(view)
-
+        
         self.interaction = interaction
         self.menuConfiguration = configuration
         self.targetedPreview = targetedPreview
+        self.style = interaction.style
+
         self.previewRendering = targetedPreview.view.snapshotView(afterScreenUpdates: false) ?? UIView()
+        self.previewRendering.layer.cornerRadius = style.menu.cornerRadius
+
         self.baseFrameInScreen = baseFrameInScreen
         self.accessoryView = configuration?.accessoryView
-        self.style = interaction.style
         self.delegate = delegate
 
         super.init(nibName: nil, bundle: nil)
+        self.overrideUserInterfaceStyle = style.overrideUserInterfaceStyle
     }
 
     required init?(coder: NSCoder) {

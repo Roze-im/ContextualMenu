@@ -7,6 +7,7 @@
 
 import UIKit
 import ContextualMenu
+import ElegantEmojiPicker
 
 class ViewController: UIViewController {
 
@@ -16,6 +17,18 @@ class ViewController: UIViewController {
         l.textColor = .blue
         l.sizeToFit()
         l.backgroundColor = .green
+        return l
+    }()
+    
+    lazy var reactionsLabel: UILabel = {
+        let l = UILabel()
+        l.text = "Reactions Label"
+        l.textColor = .darkText
+        l.backgroundColor = .secondarySystemBackground
+        let y = UIScreen.main.bounds.height/3
+        l.frame = CGRect(x: 0, y: y, width: 200, height: 100)
+        l.sizeToFit()
+        l.center.x = view.center.x
         return l
     }()
 
@@ -78,10 +91,46 @@ class ViewController: UIViewController {
         return res
     }()
 
+    private func makeAccesorieView(for object: String, source: UIView?) -> UIView {
+        let reactionView = ReactionsToolBar(currentSelected: "👍")
+        
+        reactionView.onSelectEmoji = { [weak self] emoji in
+            if emoji == "+" {
+                self?.showMoreReactions(source: source)
+                return
+            }
+            reactionView.animateSelectedEmoji(to: emoji)
+            UIView.dismissCurrentContextMenu()
+        }
+        reactionView.translatesAutoresizingMaskIntoConstraints = false
+        reactionView.heightAnchor.constraint(equalToConstant: reactionView.frame.height).isActive = true
+        reactionView.widthAnchor.constraint(equalToConstant: reactionView.frame.width).isActive = true
+        
+        return reactionView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        view.addSubview(reactionsLabel)
+        
+        reactionsLabel.addInteraction(targetedPreviewProvider: { view in
+            return .init(view: self.reactionsLabel)
+        }, menuConfigurationProvider: {  _ in
+            return ContextMenuConfiguration(
+                accessoryView: self.makeAccesorieView(for: "Spacial information", source: nil) ,
+                menu: Menu(children: [
+                    MenuElement(
+                        title: "Calendar icon",
+                        image: UIImage(systemName: "calendar"),
+                        handler: { _ in print("Tapped") }
+                    ),
+                    MenuElement(title: "Calendar", handler: { _ in print("Tapped") })
+                ])
+            )
+        }, style: ContextMenuStyle())
+        
 
         [highLabel, largeLabel, smallLabel, bigLabelTopRight, bigLabelBottomLeft].forEach { subview in
             view.addSubview(subview)
@@ -149,6 +198,26 @@ class ViewController: UIViewController {
     @objc func onTouchUpInsideAccesoryView(_ sender: Any?) {
         print("onTouchUpInsideAccesoryView")
         UIView.dismissCurrentContextMenu()
+    }
+}
+
+// MARK: - elegantEmoi
+extension ViewController: ElegantEmojiPickerDelegate {
+    func emojiPicker(_ picker: ElegantEmojiPicker,
+                     didSelectEmoji emoji: Emoji?) {
+        guard let emoji = emoji else { return }
+        debugPrint("emojiPicker \(emoji)")
+        UIView.dismissCurrentContextMenu()
+    }
+    
+    private func showMoreReactions(source: UIView?) {
+        let configuration  = ElegantConfiguration(showRandom: false,
+                                                  showReset: false,
+                                                  showClose: false)
+        let picker = ElegantEmojiPicker(delegate: self,
+                                        configuration: configuration,
+                                        sourceView: source)
+         UIView.present(picker, animated: true)
     }
 }
 

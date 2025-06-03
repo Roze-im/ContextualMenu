@@ -28,6 +28,13 @@ extension UIView {
     public static func dismissCurrentContextMenu(completion: (() -> Void)? = nil) {
         ContextMenuInteractor.shared.dismissCurrentContextMenu(completion: completion)
     }
+    
+    public static func present(_ viewControllerToPresent: UIViewController,
+                               animated flag: Bool,
+                               completion: (() -> Void)? = nil)
+    {
+        ContextMenuInteractor.shared.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
 }
 
 extension UIView {

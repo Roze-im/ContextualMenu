@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		063D35242DEEE193000AA678 /* ElegantEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 063D35232DEEE193000AA678 /* ElegantEmojiPicker */; };
+		063D35262DEEE1CE000AA678 /* ReactionsToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063D35252DEEE1CE000AA678 /* ReactionsToolBar.swift */; };
 		A0A4B2152991505400FC1537 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B2142991505400FC1537 /* AppDelegate.swift */; };
 		A0A4B2192991505400FC1537 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A4B2182991505400FC1537 /* ViewController.swift */; };
 		A0A4B22F2991514F00FC1537 /* ContextualMenu in Frameworks */ = {isa = PBXBuildFile; productRef = A0A4B22E2991514F00FC1537 /* ContextualMenu */; };
@@ -14,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		063D35252DEEE1CE000AA678 /* ReactionsToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsToolBar.swift; sourceTree = "<group>"; };
 		A0A4B2112991505400FC1537 /* ContextMenuExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContextMenuExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A4B2142991505400FC1537 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0A4B2182991505400FC1537 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -27,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				063D35242DEEE193000AA678 /* ElegantEmojiPicker in Frameworks */,
 				A0A4B22F2991514F00FC1537 /* ContextualMenu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,6 +61,7 @@
 			children = (
 				A0A4B2142991505400FC1537 /* AppDelegate.swift */,
 				A0A4B2182991505400FC1537 /* ViewController.swift */,
+				063D35252DEEE1CE000AA678 /* ReactionsToolBar.swift */,
 				A0A4B2222991505700FC1537 /* Info.plist */,
 				A0A4B2302992465D00FC1537 /* Launch Screen.storyboard */,
 			);
@@ -96,6 +101,7 @@
 			name = ContextMenuExample;
 			packageProductDependencies = (
 				A0A4B22E2991514F00FC1537 /* ContextualMenu */,
+				063D35232DEEE193000AA678 /* ElegantEmojiPicker */,
 			);
 			productName = ContextMenuExample;
 			productReference = A0A4B2112991505400FC1537 /* ContextMenuExample.app */;
@@ -125,6 +131,9 @@
 				Base,
 			);
 			mainGroup = A0A4B2082991505400FC1537;
+			packageReferences = (
+				063D35222DEEE193000AA678 /* XCRemoteSwiftPackageReference "Elegant-Emoji-Picker" */,
+			);
 			productRefGroup = A0A4B2122991505400FC1537 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -152,6 +161,7 @@
 			files = (
 				A0A4B2192991505400FC1537 /* ViewController.swift in Sources */,
 				A0A4B2152991505400FC1537 /* AppDelegate.swift in Sources */,
+				063D35262DEEE1CE000AA678 /* ReactionsToolBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +357,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		063D35222DEEE193000AA678 /* XCRemoteSwiftPackageReference "Elegant-Emoji-Picker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Finalet/Elegant-Emoji-Picker";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		063D35232DEEE193000AA678 /* ElegantEmojiPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 063D35222DEEE193000AA678 /* XCRemoteSwiftPackageReference "Elegant-Emoji-Picker" */;
+			productName = ElegantEmojiPicker;
+		};
 		A0A4B22E2991514F00FC1537 /* ContextualMenu */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ContextualMenu;

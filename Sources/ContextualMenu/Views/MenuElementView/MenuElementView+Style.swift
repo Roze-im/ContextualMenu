@@ -23,20 +23,20 @@ extension MenuElementView {
         let iconSize: CGSize
 
         public init(
-            height: CGFloat = 44,
+            height: CGFloat = 41.5,
             backgroundColor: UIColor = .clear,
-            highlightedBackgroundColor: UIColor = .black.withAlphaComponent(0.2),
+            highlightedBackgroundColor: UIColor = .systemGray4,
             defaultTitleAttributes: [NSAttributedString.Key : Any] = [
-                .font: UIFont.systemFont(ofSize: 17),
-                .foregroundColor: UIColor.black
+                .font: UIFont.systemFont(ofSize: 16),
+                .foregroundColor: UIColor.label
             ],
             destructiveTitleAttributes: [NSAttributedString.Key : Any] = [
-                .font: UIFont.systemFont(ofSize: 17),
-                .foregroundColor: UIColor.red
+                .font: UIFont.systemFont(ofSize: 16),
+                .foregroundColor: UIColor.systemRed
             ],
-            defaultIconTint: UIColor = .black,
-            destructiveIconTint: UIColor = .red,
-            iconSize: CGSize = .init(width: 22, height: 22)
+            defaultIconTint: UIColor = .label,
+            destructiveIconTint: UIColor = .systemRed,
+            iconSize: CGSize = .init(width: 20, height: 20)
         ) {
             self.height = height
             self.backgroundColor = backgroundColor

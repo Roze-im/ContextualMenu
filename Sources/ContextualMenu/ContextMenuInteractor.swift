@@ -104,6 +104,13 @@ class ContextMenuInteractor {
             completion?()
         }
     }
+    
+    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        if contextMenuViewController == window.rootViewController {
+            contextMenuViewController?.present(viewControllerToPresent, animated: flag, completion: completion)
+        }
+    }
+
 
     private func restoreWindow() {
         window.rootViewController = nil

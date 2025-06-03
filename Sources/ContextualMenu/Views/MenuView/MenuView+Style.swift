@@ -14,7 +14,8 @@ extension MenuView {
         let separatorColor: UIColor
         let cornerRadius: CGFloat
         let element: MenuElementView.Style
-        let width: CGFloat
+        let minWidth: CGFloat
+        let maxWidth: CGFloat
 
         let disappearedScalingValue: CGFloat
 
@@ -22,11 +23,11 @@ extension MenuView {
         let disapparition: AnimationParameters
 
         public init(
-            backgroundColor: UIColor = .white.withAlphaComponent(0.39),
-            separatorColor: UIColor = .darkGray,
+            backgroundColor: UIColor = .secondarySystemGroupedBackground,
+            separatorColor: UIColor = .separator,
             cornerRadius: CGFloat = 12,
             element: MenuElementView.Style = MenuElementView.Style(),
-            width: CGFloat = 250,
+            minWidth: CGFloat = 250,
             disappearedScalingValue: CGFloat = 0.0001,
             apparition: AnimationParameters = AnimationParameters(),
             disapparition: AnimationParameters = AnimationParameters()
@@ -35,10 +36,11 @@ extension MenuView {
             self.separatorColor = separatorColor
             self.cornerRadius = cornerRadius
             self.element = element
-            self.width = width
+            self.minWidth = minWidth
             self.disappearedScalingValue = disappearedScalingValue
             self.apparition = apparition
             self.disapparition = disapparition
+            self.maxWidth = UIScreen.main.bounds.width - 32
         }
     }
 }
