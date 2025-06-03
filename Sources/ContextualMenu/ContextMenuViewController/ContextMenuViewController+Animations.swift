@@ -45,9 +45,7 @@ extension ContextMenuViewController: ContextMenuAnimatable {
                 guard let self else { return }
                 self.view.layoutIfNeeded()
                 self.backgroundBlur.alpha = self.style.blurAlpha
-                // Apply transform to previewRendering
-                let transform = self.style.preview.transform
-                self.previewRendering.transform = transform
+                self.previewRendering.transform = self.style.preview.transform
 
                 if self.animatableAccessoryView == nil {
                     // Perform a default fadin animation if needed

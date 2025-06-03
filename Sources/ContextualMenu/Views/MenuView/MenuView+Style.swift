@@ -15,6 +15,7 @@ extension MenuView {
         let cornerRadius: CGFloat
         let element: MenuElementView.Style
         let minWidth: CGFloat
+        let maxWidth: CGFloat
 
         let disappearedScalingValue: CGFloat
 
@@ -39,6 +40,7 @@ extension MenuView {
             self.disappearedScalingValue = disappearedScalingValue
             self.apparition = apparition
             self.disapparition = disapparition
+            self.maxWidth = UIScreen.main.bounds.width - 32
         }
     }
 }
